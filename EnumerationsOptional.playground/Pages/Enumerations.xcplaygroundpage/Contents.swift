@@ -19,8 +19,8 @@ func isNotificationMuted(on day: String) -> Bool {
 // let result = dayType(for: week[4])
 // let isMuted = isNotificationMuted(on: result)
 
-enum Day {
-    case sunday
+enum Day: Int {
+    case sunday = 1
     case monday
     case tuesday
     case wednesday
@@ -28,6 +28,8 @@ enum Day {
     case friday
     case saturday
 }
+
+Day.friday.rawValue
 
 enum DayType{
     case weekday
@@ -69,22 +71,51 @@ enum ColorComponent {
 
 ColorComponent.rgb(red: 61.0, green: 120.0, blue: 198.0, alpha: 1.0).color()
 
+// Raw Values
+
+enum Coin: Double {
+    case penny = 0.01
+    case nickel = 0.05
+    case dime = 0.1
+    case quarter = 0.25
+}
+
+let coins: [Coin] = [.penny, .nickel, .dime, .dime, .quarter, .quarter, .quarter]
+
+func sum(having coins: [Coin]) -> Double {
+    var total: Double = 0
+    
+    for coin in coins {
+        total += coin.rawValue
+    }
+    
+    return total
+}
+
+sum(having: coins)
+
+enum HTTP: String {
+    case post
+    case get
+    case put
+    case delete
+}
+
+HTTP.delete.rawValue
 
 
+enum HTTPStatusCode: Int {
+    case success = 200
+    case forbidden = 400
+    case unauthorized = 401
+    case notFound = 404
+}
 
+let statusCode = 200
 
-
-
-
-
-
-
-
-
-
-
-
-
+if let HTTPStatusCode = HTTPStatusCode(rawValue: statusCode) {
+    print(HTTPStatusCode)
+}
 
 
 
