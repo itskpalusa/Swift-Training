@@ -2,11 +2,11 @@ protocol FullNameable {
     var fullName: String { get }
 }
 
-struct User: FullNameable {
-    var fullName: String
-}
+// struct User: FullNameable {
+//    var fullName: String
+// }
 
-let user = User(fullName: "John Smith")
+// let user = User(fullName: "John Smith")
 
 struct Friend: FullNameable {
     let firstName: String
@@ -166,24 +166,42 @@ class Dice {
 var d6 = Dice(sides: 6, generator: LinearCongruentialGenerator())
 d6.roll()
 
-let generator = LinearCongruentialGenerator()
-print("Here's a random number: \(generator.random())")
-// Prints "Here's a random number: 0.37464991998171"
-print("And another one: \(generator.random())")
-// Prints "And another one: 0.729023776863283"
 
+// Protocol Inheritence
 
+protocol Printable {
+    func description () -> String
+}
 
+protocol PrettyPrintable: Printable {
+    func PrettyDescription() -> String
+}
 
+struct User: PrettyPrintable, Equatable {
+    let name: String
+    let age: Int
+    let address: String
+    
+    func description() -> String {
+        return "\(name), \(age), \(address)"
+    }
+    
+    func PrettyDescription() -> String {
+        return "\nname: \(name)\nage: \(age)\naddress: \(address)"
+    }
+    
+    static func ==(lhs: User, rhs: User) -> Bool {
+        return lhs.name == rhs.name && lhs.age == rhs.age && lhs.address == rhs.address
+    }
+}
 
+let user = User(name: "Karthik", age: 17, address: "someAddress")
+user.description()
+print(user.PrettyDescription())
 
+let anotherUser = User(name: "Karthik", age: 17, address: "someAddress")
 
-
-
-
-
-
-
+user == anotherUser
 
 
 
